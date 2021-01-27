@@ -60,8 +60,10 @@
 #### PARTNER REPOSITORIES
 
 Those repositories might also have something you like, make sure to check them out! 
-[akgunter/crt-royale-reshade] (https://github.com/akgunter/crt-royale-reshade) - A port of the most accurate and feature filled CRT shader of RetroArch for ReShade. Original work by TroggleMonkey, ReShade port by akgunter. 
-[luluco250/FXShaders] (https://github.com/luluco250/FXShaders) - luluco's shader repository. Probably listed at the big ReShade ones, but worth mentioning here.
+
+[akgunter/crt-royale-reshade](https://github.com/akgunter/crt-royale-reshade) - A port of the most accurate and feature filled CRT shader of RetroArch for ReShade. Original work by TroggleMonkey, ReShade port by akgunter. 
+
+[luluco250/FXShaders](https://github.com/luluco250/FXShaders) - luluco's shader repository. Probably listed at the big ReShade ones, but worth mentioning here.
 	 
 #### CREDITS
 
