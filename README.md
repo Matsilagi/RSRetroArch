@@ -58,11 +58,14 @@
  - vt220 by sprash3: Meant to mimic a vt220 terminal, also includes the Night version + a version with the Frame only so you can fit your own screen data inside it. (https://www.shadertoy.com/view/MtBXW3)
 
 #### PARTNER REPOSITORIES
-	Those repositories might also have something you like, make sure to check them out!
-	[akgunter/crt-royale-reshade] (https://github.com/akgunter/crt-royale-reshade) - A port of the most accurate and feature filled CRT shader of RetroArch for ReShade. Original work by TroggleMonkey, ReShade port by akgunter.
-	[luluco250/FXShaders] (https://github.com/luluco250/FXShaders) - luluco's shader repository. Probably listed at the big ReShade ones, but worth mentioning here.
+
+Those repositories might also have something you like, make sure to check them out!
+ [akgunter/crt-royale-reshade] (https://github.com/akgunter/crt-royale-reshade) - A port of the most accurate and feature filled CRT shader of RetroArch for ReShade. Original work by TroggleMonkey, ReShade port by akgunter.
+ [luluco250/FXShaders] (https://github.com/luluco250/FXShaders) - luluco's shader repository. Probably listed at the big ReShade ones, but worth mentioning here.
 	 
 #### CREDITS
-	Besides the ones from their original authors, a few goes for me. Mostly for porting, fixing and maintaining those over the years. It was due to a reformulation / re-organization so it could get curated and pasted onto the reshade repositories list.
-	Since i was considered the "Retro-shaders" guy for ReShade, i decided to fully embrace it and include shaders from my misc repos and Shadertoy Repos related to that sort of thing. This was the result.
-	Also credits to Pascal Gilcher and luluco250 for helping me with stupid questions i had back at the time, and basically tutoring / mentoring me. Also thanks to akgunter for fixing CRT-Potato for me last night.
+
+ Besides the ones from their original authors, a few goes for me. Mostly for porting, fixing and maintaining those over the years. It was due to a reformulation / re-organization so it could get curated and pasted onto the reshade repositories list.
+ Since i was considered the "Retro-shaders" guy for ReShade, i decided to fully embrace it and include shaders from my misc repos and Shadertoy Repos related to that sort of thing. This was the result.
+	
+ Also credits to Pascal Gilcher and luluco250 for helping me with stupid questions i had back at the time, and basically tutoring / mentoring me. Also thanks to akgunter for fixing CRT-Potato for me last night.
