@@ -40,22 +40,22 @@
  - zfast_crt by SoltanGris42: An ultra-lightweight CRT shader. Made to work fast on integrated gpus, while looking good. Designed for 1080p displays.
  
  There are also a few shaders from MAME included, those are:
- -ColorMAME: Meant to work as a color-tweaking knob of a CRT display. Part of the MAME CRT shader, but split-out for convenience.
- -Deconverge: Meant to simulate color convergence on CRT Displays. Distorts the channels of the image.
- -Defocus: Meant to simulate the blurring of a CRT display. Blurs the image Horizontally and Vertically, similar to a Gaussian Blur shader.
- -NTSC: A direct port of MAME's NTSC signal emulation shader. Works similar to the one by Themaister, but with non-animated crosstalk and less saturated colors.
- -Phosphor: Simulates the phosphor decadence of a CRT display, leaving "ghosts" of the previous frames.
+ - ColorMAME: Meant to work as a color-tweaking knob of a CRT display. Part of the MAME CRT shader, but split-out for convenience.
+ - Deconverge: Meant to simulate color convergence on CRT Displays. Distorts the channels of the image.
+ - Defocus: Meant to simulate the blurring of a CRT display. Blurs the image Horizontally and Vertically, similar to a Gaussian Blur shader.
+ - NTSC: A direct port of MAME's NTSC signal emulation shader. Works similar to the one by Themaister, but with non-animated crosstalk and less saturated colors.
+ - Phosphor: Simulates the phosphor decadence of a CRT display, leaving "ghosts" of the previous frames.
  
  And also, some more experiments ported from around the web and Shadertoy
- -BasicCRT by the8bitpimp: A really basic blue / frosted-glass like CRT shader with flickering. (https://the8bitpimp.wordpress.com/2014/07/17/retro-crt-shader/)
- -Cathode by nimitz: Creates a shadowmask / grid similar to a CRT display. (https://www.shadertoy.com/view/4lXcDH)
- -LCD Post Effect by MenacingMecha: Makes the screen look like a Backlit LCD display, not really useful but might look eye-candy for some (https://www.shadertoy.com/view/ldBfDd)
- -MattiasCRT by Mattias: Ported from Shadertoy (https://www.shadertoy.com/view/lsB3DV) , based on the work of inigo quilez.
- -MetaCRT by P_Malin: Phosphor Mask / 2D part of the MetaCRT Shadertoy by P_Malin (https://www.shadertoy.com/view/4dlyWX)
- -Needs More JPEG by rory618: Applies DCT compression used by the JPEG file format. (https://www.shadertoy.com/view/llfyz4)
- -NTSC Decoder by XOT: Modulates the signal like NTSC does. (https://www.shadertoy.com/view/Mdffz7)
- -TV CRT Pixels by iq: Mimics the Shadow-Mask / Slot-Mask of a CRT TV. (https://www.shadertoy.com/view/XsfGDl)
- -vt220 by sprash3: Meant to mimic a vt220 terminal, also includes the Night version + a version with the Frame only so you can fit your own screen data inside it. (https://www.shadertoy.com/view/MtBXW3)
+ - BasicCRT by the8bitpimp: A really basic blue / frosted-glass like CRT shader with flickering. (https://the8bitpimp.wordpress.com/2014/07/17/retro-crt-shader/)
+ - Cathode by nimitz: Creates a shadowmask / grid similar to a CRT display. (https://www.shadertoy.com/view/4lXcDH)
+ - LCD Post Effect by MenacingMecha: Makes the screen look like a Backlit LCD display, not really useful but might look eye-candy for some (https://www.shadertoy.com/view/ldBfDd)
+ - MattiasCRT by Mattias: Ported from Shadertoy (https://www.shadertoy.com/view/lsB3DV) , based on the work of inigo quilez.
+ - MetaCRT by P_Malin: Phosphor Mask / 2D part of the MetaCRT Shadertoy by P_Malin (https://www.shadertoy.com/view/4dlyWX)
+ - Needs More JPEG by rory618: Applies DCT compression used by the JPEG file format. (https://www.shadertoy.com/view/llfyz4)
+ - NTSC Decoder by XOT: Modulates the signal like NTSC does. (https://www.shadertoy.com/view/Mdffz7)
+ - TV CRT Pixels by iq: Mimics the Shadow-Mask / Slot-Mask of a CRT TV. (https://www.shadertoy.com/view/XsfGDl)
+ - vt220 by sprash3: Meant to mimic a vt220 terminal, also includes the Night version + a version with the Frame only so you can fit your own screen data inside it. (https://www.shadertoy.com/view/MtBXW3)
 
 ###PARTNER REPOSITORIES
 	Those repositories might also have something you like, make sure to check them out!
