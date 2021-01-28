@@ -9,7 +9,7 @@
  - 3DFX by LeiLei: attempts to mimic the VGA / RAMDAC cables, color dithering and screen quality of 3DFX cards, more specifically Vooodoo 2/3. Long gone from the RetroArch Shader repository.
  - ArtifactColors by FlyGuy: Uses a signal modulation created trough NTSC artifacting, to generate colors, pretty much like Apple II's low-res mode.
  - CMYK Halftone Dot by hunterk: Originally made as a WebGL Demo by Stefan Gustavson, simulates the halftone dots used in CMYK prints, useful for magazine-like shots.
- - CoolRetroTerminal by Swordfish90: Originally from a Linux app [Swordfish90/cool-retro-term] (https://github.com/Swordfish90/cool-retro-term) , i ported its Pixel Shader from QT a long time ago, its not by any means up-to-date, but still looks ultra-similar to how CoolRetroTerm works so, i guess its still useable. A big buggy and without bloom, but most of its features work fine.
+ - CoolRetroTerminal by Swordfish90: Originally from a Linux app [Swordfish90/cool-retro-term](https://github.com/Swordfish90/cool-retro-term) , i ported its Pixel Shader from QT a long time ago, its not by any means up-to-date, but still looks ultra-similar to how CoolRetroTerm works so, i guess its still useable. A big buggy and without bloom, but most of its features work fine.
  - CRT-Aperture by ???: Couldn't find the Author name, but seems like a modified CRT-Easymode made to mimic more a Trinitron display.
  - CRT-Caligari by Caligari: A port made by Hyllian of an experiment made by Caligari. Based on xythen's Matlab algorithm on a scale-factor independent CRT shader.
  - CRT-cgwg by cgwg and Themaister: One of the oldest CRT shaders, made to mimic a slotmask CRT. It was the base work for lots of future implementations, and considered to be the pioneer on that extent / niche.
@@ -50,7 +50,7 @@
  - BasicCRT by the8bitpimp: A really basic blue / frosted-glass like CRT shader with flickering. (https://the8bitpimp.wordpress.com/2014/07/17/retro-crt-shader/)
  - Cathode by nimitz: Creates a shadowmask / grid similar to a CRT display. (https://www.shadertoy.com/view/4lXcDH)
  - LCD Post Effect by MenacingMecha: Makes the screen look like a Backlit LCD display, not really useful but might look eye-candy for some (https://www.shadertoy.com/view/ldBfDd)
- - MattiasCRT by Mattias: Ported from Shadertoy (https://www.shadertoy.com/view/lsB3DV) , based on the work of inigo quilez.
+ - MattiasCRT by Mattias: Ported from Shadertoy, based on the work of inigo quilez. (https://www.shadertoy.com/view/lsB3DV)
  - MetaCRT by P_Malin: Phosphor Mask / 2D part of the MetaCRT Shadertoy by P_Malin (https://www.shadertoy.com/view/4dlyWX)
  - Needs More JPEG by rory618: Applies DCT compression used by the JPEG file format. (https://www.shadertoy.com/view/llfyz4)
  - NTSC Decoder by XOT: Modulates the signal like NTSC does. (https://www.shadertoy.com/view/Mdffz7)
