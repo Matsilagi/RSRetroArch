@@ -1,8 +1,6 @@
 # RSRetroArch
  (Curated) Repository of RetroArch and retro-related shaders / shaders from programs, ported for ReShade.
  If you like what you see, consider dropping a coin at my PayPal at that email: matsilagi2@hotmail.com. Any amount is appreciated.
- 
- Also to be soon refactored is my (mostly grey-area) Unity shaders repository, so stay tuned!
 
 #### CONTENTS
  The Shaders included here comes mostly from [libretro/common-shaders](https://github.com/libretro/common-shaders) , but there are some from other sources aswell, below are a list of shaders, where they came from, and what they do:
@@ -64,6 +62,8 @@ Those repositories might also have something you like, make sure to check them o
 [akgunter/crt-royale-reshade](https://github.com/akgunter/crt-royale-reshade) - A port of the most accurate and feature filled CRT shader of RetroArch for ReShade. Original work by TroggleMonkey, ReShade port by akgunter. 
 
 [luluco250/FXShaders](https://github.com/luluco250/FXShaders) - luluco's shader repository. Probably listed at the big ReShade ones, but worth mentioning here.
+
+[Matsilagi/RSJankShaders](https://github.com/Matsilagi/RSJankShaders) - Random experiments, small codes and shaders that doesn't fit any other criteria here. Made mostly for curiosity purposes and archival.
 
 [Matsilagi/RSUnityShaders](https://github.com/Matsilagi/RSUnityShaders) - Abandon all ye hope those who enter here!
 	 
