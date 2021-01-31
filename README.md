@@ -34,6 +34,7 @@
  - RetroCRT by KillaMaaki: A port of the CRT shader from PPSSPP. Has color distortions, scanlines and barrel / display distortion.
  - Scanlines-Abs by RiskyJumps: A sine-wave Scanline shader. Applies scanlines using a Sine-Wave, looks great with integer scaled games.
  - Scanlines-Fract by hunterk: Similar to the Scanlines-Abs, but using a frac operation. May look thicker and darker on some cases, but works better with non-integer scaled games.
+ - SGENPT-mul by Hyllian: A shader that attempts to blur / join the dithering of Sega Genesis games. Works somewhat ok.
  - Technicolor by hunterk: A Technicolor shader meant to mimic old cartoons and suchs. Inspired partly by Cuphead.
  - zfast_crt by SoltanGris42: An ultra-lightweight CRT shader. Made to work fast on integrated gpus, while looking good. Designed for 1080p displays.
  
