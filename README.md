@@ -72,5 +72,7 @@ Those repositories might also have something you like, make sure to check them o
 
  Besides the ones from their original authors, a few goes for me. Mostly for porting, fixing and maintaining those over the years. It was due to a reformulation / re-organization so it could get curated and pasted onto the reshade repositories list.
  Since i was considered the "Retro-shaders" guy for ReShade, i decided to fully embrace it and include shaders from my misc repos and Shadertoy Repos related to that sort of thing. This was the result.
+ 
+ Credits to Axel Moore for giving suggestions and the files for the MAME shaders / tell me which shaders i should port and how they looked in-emulator.
 	
  Also credits to Pascal Gilcher and luluco250 for helping me with stupid questions i had back at the time, and basically tutoring / mentoring me. Also thanks to akgunter for fixing CRT-Potato for me last night.
