@@ -1,3 +1,5 @@
+#include "ReShade.fxh"
+
 //Cathode by nimitz (twitter: @stormoid)
 //2017 nimitz All rights reserved
 
@@ -12,6 +14,17 @@
 	(dither based) transparency and faked specular highlights as seen in the bigger sprite.
 	A version tweaked and made for 4k displays could look pretty close to the real thing.
 */
+
+uniform float resSize <
+	ui_type = "drag";
+	ui_min = 1.0;
+	ui_max = 20.0;
+	ui_step = 1.0;
+	ui_label = "Resolution Size [Cathode]";
+	ui_tooltip = "Size of the scanlines.";
+> = 4.0;
+
+#define mod(x,y) (x-y*floor(x/y))
 
 //Phosphor decay
 float decay(in float d)
@@ -41,7 +54,7 @@ float3 phosphors(in float2 p, sampler2D tex, float2 frgCoord)
     for(int j=-2;j<=2;j++)
     {
         float2 tap = floor(p) + 0.5 + float2(i,j);
-		float3 rez = tex2D(tex, tap/ReShade::ScreenSize.xy).rgb; //nearest neighbor
+		float3 rez = tex2D(tex, frgCoord.xy).rgb; //nearest neighbor
         
 		//center points
         float rd = sqd(tap, p + float2(0.0,0.2));//distance to red dot
@@ -65,7 +78,7 @@ void PS_Cathode(in float4 pos : SV_POSITION, in float2 txcoord : TEXCOORD0, out 
 	float2 p = uv.xy/ReShade::ScreenSize.xy;
     float2 f = uv.xy;
     
-    float3 col = phosphors(uv.xy/4.0, ReShade::BackBuffer,txcoord.xy);
+    float3 col = phosphors(uv.xy/resSize, ReShade::BackBuffer, txcoord.xy);
 	frgcol = float4(col, 1.0);
 }
 
