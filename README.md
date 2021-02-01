@@ -52,7 +52,6 @@
  - MattiasCRT by Mattias: Ported from Shadertoy, based on the work of inigo quilez. (https://www.shadertoy.com/view/lsB3DV)
  - MetaCRT by P_Malin: Phosphor Mask / 2D part of the MetaCRT Shadertoy by P_Malin (https://www.shadertoy.com/view/4dlyWX)
  - Needs More JPEG by rory618: Applies DCT compression used by the JPEG file format. (https://www.shadertoy.com/view/llfyz4)
- - NTSC Decoder by XOT: Modulates the signal like NTSC does. (https://www.shadertoy.com/view/Mdffz7)
  - TV CRT Pixels by iq: Mimics the Shadow-Mask / Slot-Mask of a CRT TV. (https://www.shadertoy.com/view/XsfGDl)
  - vt220 by sprash3: Meant to mimic a vt220 terminal, also includes the Night version + a version with the Frame only so you can fit your own screen data inside it. (https://www.shadertoy.com/view/MtBXW3)
 
