@@ -286,7 +286,7 @@ float4 PS_NewPixie_Final(float4 pos: SV_Position, float2 uv_tx : TEXCOORD0) : SV
     /* Frame */
     float2 fscale = float2( 0.026, -0.018);//float2( -0.018, -0.013 );
     uv = float2(uv.x, 1.-uv.y);
-    float4 f= tex2D(sFrame,uv.xy);//*((1.0)+2.0*fscale)-fscale-float2(-0.0, 0.005));
+    float4 f= tex2D(sFrame,uv_tx.xy);//*((1.0)+2.0*fscale)-fscale-float2(-0.0, 0.005));
     f.xyz = lerp( f.xyz, float3(0.5,0.5,0.5), 0.5 );
     float fvig = clamp( -0.00+512.0*uv.x*uv.y*(1.0-uv.x)*(1.0-uv.y), 0.2, 0.8 );
     col = lerp( col, lerp( max( col, 0.0), pow( abs( f.xyz ), float3( 1.4,1.4,1.4 ) ) * fvig, f.w * f.w), float3( use_frame,use_frame,use_frame ) );
