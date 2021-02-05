@@ -273,8 +273,8 @@ float4 PS_NewPixie_Final(float4 pos: SV_Position, float2 uv_tx : TEXCOORD0) : SV
     col *= (1.0-0.004*(sin(50.0*time+curved_uv.y*2.0)*0.5+0.5));
 		
     /* Clamp */
-	if(max(abs(uv.x-0.5),abs(uv.y-0.5))>0.5)
-		col = float3(0.0,0.0,0.0);
+//    if(max(abs(uv.x-0.5),abs(uv.y-0.5))>0.5)
+//        col = float3(0.0,0.0,0.0);
 		
 //    if (curved_uv.x < 0.0 || curved_uv.x > 1.0)
 //        col *= 0.0;
