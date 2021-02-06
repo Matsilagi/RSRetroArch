@@ -12,7 +12,7 @@
  - CRT-Caligari by Caligari: A port made by Hyllian of an experiment made by Caligari. Based on xythen's Matlab algorithm on a scale-factor independent CRT shader.
  - CRT-cgwg by cgwg and Themaister: One of the oldest CRT shaders, made to mimic a slotmask CRT. It was the base work for lots of future implementations, and considered to be the pioneer on that extent / niche.
  - CRT-Easymode by Easymode: A fast / lightweight flat-display CRT shader intended for 1080p displays. Not that fancy, but it looks good and with a average perf. hit when Graphics Power is of concern.
- - FakeLottes by hunterk: A scanlines + crt curvature shader using Lottes masks. Used as an alternative to CRT-Lottes for low power GPUs and Raspberry systems.
+ - CRT-Frutbunn by frutbunn: Adapted from his shadertoy "Another CRT Shader" (https://www.shadertoy.com/view/XdyGzR)
  - CRT-Geom by cgwg, Themaister and DOLLS: A modified / further worked CRT shader based on cgwg. Has more options for masks, distortions and rotations of the CRT display. Meant to mimic Arcade-machine cabinets and displays.
  - CRT-Hyllian by hyllian: A sharp / Trinitron-like CRT Shader. Made to give a sharp and crisp output with slight bloom, similar to Sony's BVM line of displays.
  - CRT-Lottes by Timothy Lottes: Created by the same person who made FXAA for nvidia, this is a high-quality and good looking CRT shader for 1080p and larger displays. Requires a somewhat powerful PC to run it, has multiple mask and distortion options, Bloom and Halation effects. Used in the book "The Bitmap Brothers: Universe" for the images on it.
@@ -25,6 +25,7 @@
  - CRT-Yee64 and CRT-Yeetron by Christian Whitehead: Based on a reverse-engineered / assembly version of the shaders found in Sonic Mania. Not 100% scale-accurate, but looks fine on most use-cases. Yee64 is the SMOOTH option, while YEETRON is the Sharp option.
  - DOSGame by Boris Vorontsov: Originally a misc. shader for ENB Series, now ported to ReShade. This mimics the old limited colors and resolutions of DOS-era games. Good if you are into quick setups to make your games look like FMVs.
  - EGAFilter by ???: Taken from DOSBox, meant to mimic an EGA display, with very, VERY limited color depth.
+ - FakeLottes by hunterk: A scanlines + crt curvature shader using Lottes masks. Used as an alternative to CRT-Lottes for low power GPUs and Raspberry systems.
  - GTUv50 by aliaspider: Less meant to mimic the physical CRT appearance and more the signals interpreted by them, this works as a NTSC-shader with scanlines mostly. Due to its flexibility with blurring, can be easily used to fix / re-blend dithering effects in old games. Requires a somewhat-powerful PC in certain values.
  - LeiFX_OA (3DFX) by LeiLei: Same as 3DFX, but ported from OpenArena, supposedly, that one is more updated than the RetroArch versions.
  - MCAmber,Green and Orange by ???: Taken from DOSBox, made to mimic monochrome phosphor displays. It basically just tints the screen, nothing too special about them.
