@@ -46,6 +46,7 @@
  - ColorMAME: Meant to work as a color-tweaking knob of a CRT display. Part of the MAME CRT shader, but split-out for convenience.
  - Deconverge: Meant to simulate color convergence on CRT Displays. Distorts the channels of the image.
  - Defocus: Meant to simulate the blurring of a CRT display. Blurs the image Horizontally and Vertically, similar to a Gaussian Blur shader.
+ - MAME PostProcess: A CRT Filter along with the NTSC signal / crosstalk. Basically an AIO port of the MAME pipeline.
  - NTSC: A direct port of MAME's NTSC signal emulation shader. Works similar to the one by Themaister, but with non-animated crosstalk and less saturated colors.
  - Phosphor: Simulates the phosphor decadence of a CRT display, leaving "ghosts" of the previous frames.
  
