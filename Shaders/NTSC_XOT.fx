@@ -13,14 +13,14 @@ uniform float display_sizeX <
 	ui_type = "drag";
 	ui_min = 1.0;
 	ui_max = BUFFER_WIDTH;
-	ui_label = "Screen Width [ArtifactColors]";
+	ui_label = "Screen Width [NTSC-XOT]";
 > = BUFFER_WIDTH;
 
 uniform float display_sizeY <
 	ui_type = "drag";
 	ui_min = 1.0;
 	ui_max = BUFFER_HEIGHT;
-	ui_label = "Screen Height [ArtifactColors]";
+	ui_label = "Screen Height [NTSC-XOT]";
 > = BUFFER_HEIGHT;
 
 //  TV adjustments
