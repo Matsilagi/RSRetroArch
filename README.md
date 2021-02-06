@@ -20,6 +20,7 @@
  - CRT-NES-MINI by ???: Based on the CRT shader found on Nintendo's Retro NES console. Its incredibly lightweight, but has no fancy bells and whistles, just simple scanlines.
  - CRT-Pi by davej: A shader designed to take it easy on Raspberry Pi systems. Incredibly lightweight aswell with main characteristics of CRT displays. Should be useful for those running under integrated displays.
  - CRT-Potato by Brad Parker: Available in 2 versions (Cool and Warm), this shader takes a CRT mask texture and tiles it on the screen, making it a pretty looking CRT Phosphor Mask shader, without a very big performance hit, so light even a "potato" computer can run it.
+ - CRTRefresh by Me: A simple shader which adds a scanline / scrolling flicker to the screen, similar to when recording CRTs through a camera.
  - CRT-Sim by Kyle Pittman: Taken from "Super Win the Game", this shader mimics a old CRT TV with the crosstalking / Dot Crawling artifacts of NTSC signal. Also has phosphor decadence effects of a CRT display.
  - CRT-Yee64 and CRT-Yeetron by Christian Whitehead: Based on a reverse-engineered / assembly version of the shaders found in Sonic Mania. Not 100% scale-accurate, but looks fine on most use-cases. Yee64 is the SMOOTH option, while YEETRON is the Sharp option.
  - EGAFilter by ???: Taken from DOSBox, meant to mimic an EGA display, with very, VERY limited color depth.
@@ -31,6 +32,7 @@
  - nGlide 3DFX by Zeus Software: A port of the experimental 3DFX dithering and RAMDAC filtering used in nGlide. It is accurate to the old GPUs and not meant to mimic them, so, lower resolutions will look better with it.
  - NTSC by Themaister and cgwg: A shader that mimics NTSC Crosstalk and signal. Comes with a few options and a variation with no scanlines for those who just want to use the signal part with another CRT shader bundled.
  - PAL by svo: A shader which mimics the signal of PAL displays with its artifacts and imperfections.
+ - PowerVR Buffer by leilei: Similar to the 3DFX shaders, this one mimics the PowerVR GPUs output.
  - R57_PAL by r57shell: A PAL shader meant to also mimic the artifacts and dot crawling of the PAL signal. Comes with 2 versions, the new one is actually using the r57 pal preset for any system, and the old one is like defining USE_SAMPLED and USE_RAW on the preset.
  - RetroCRT by KillaMaaki: A port of the CRT shader from PPSSPP. Has color distortions, scanlines and barrel / display distortion.
  - Scanlines-Abs by RiskyJumps: A sine-wave Scanline shader. Applies scanlines using a Sine-Wave, looks great with integer scaled games.
