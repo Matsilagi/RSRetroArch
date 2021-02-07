@@ -141,7 +141,7 @@ float4 NTSCEncodePS( float4 pos : SV_Position, float2 texcoord : TEXCOORD0) : SV
 
 float3 t2d(float2 texcoord)
 {
-	return tex2D(s0,texcoord);
+	return tex2D(s0,texcoord).rgb;
 }
 
 #define fixCoord (texcoord - float2( 0.5 * one_x, 0.0)) 
