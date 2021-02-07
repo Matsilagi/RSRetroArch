@@ -13,19 +13,39 @@
 
 //16-BIT DITHER VARIABLES
 
-uniform int DITHERAMOUNT <
-	ui_type = "drag";
-	ui_min = -16;
-	ui_max = 16;
-	ui_label = "Dither Amount [3DFX]";
-> = 0;
+#ifndef USE_DITHER
+	#define USE_DITHER 0 //[0 or 1] Enables the old Dithering option
+#endif
 
-uniform int DITHERBIAS <
-	ui_type = "drag";
-	ui_min = -16;
-	ui_max = 16;
-	ui_label = "Dither Bias [3DFX]";
-> = 0;
+#if (USE_DITHER == 1)
+	
+	#ifndef USE_RAMDAC
+		#define USE_RAMDAC 0 //[0 or 1] Use the RAMDAC 4x1 filter
+	#endif
+	
+	uniform int DITHER_AMOUNT <
+		ui_type = "drag";
+		ui_min = -16;
+		ui_max = 16;
+		ui_label = "Dither Amount [3DFX]";
+	> = 0;
+
+	uniform int DITHER_BIAS <
+		ui_type = "drag";
+		ui_min = -16;
+		ui_max = 16;
+		ui_label = "Dither Bias [3DFX]";
+	> = 0;
+	
+	#if USE_RAMDAC
+		uniform float LEIFX_LINES <
+			ui_type = "drag";
+			ui_min = 0.0;
+			ui_max = 2.0;
+			ui_label = "Lines Intensity [3DFX]";
+		> = 1.0;
+	#endif
+#endif
 
 //3DFX VARIABLES
 
@@ -37,7 +57,7 @@ uniform int DITHERBIAS <
 	#define 	PIXELWIDTH 	1.0f
 	#define		FILTCAP		(32.0f / 255)	// filtered pixel should not exceed this 
 	#define		FILTCAPG	(FILTCAP / 2)
-  
+	
 	static const float filtertable_x[4] = {
 		1, -1,-1,1   
 	};
@@ -45,7 +65,6 @@ uniform int DITHERBIAS <
 	static const float filtertable_y[4] = {
 		-1,1,-1,1   
 	};
-  
 #else
 	#define 	PIXELWIDTH 	1.0f
 	#define		FILTCAP		(64.0f / 255)	// filtered pixel should not exceed this 
@@ -101,6 +120,62 @@ void PS_LeiFX_Dither(in float4 pos : SV_POSITION, in float2 uv : TEXCOORD0, out 
 	
 	float3 pe1 = tex2D(ReShade::BackBuffer, uv); // first pixel...
 	
+	#if (USE_DITHER == 1)
+		float3 colord = float3(0.0,0.0,0.0);
+		float3 color;
+		float2 res;
+		
+		res.x = ReShade::ScreenSize.x;
+		res.y = ReShade::ScreenSize.y;
+		
+		int yeh = 0;
+		int ohyes = 0;
+		
+		float2 ditheu = uv.xy * res.xy;
+		ditheu.x = uv.x * res.x;
+		ditheu.y = uv.y * res.y;
+		
+		int ditx = int(fmod(ditheu.x, 4.0));
+		int dity = int(fmod(ditheu.y, 4.0));
+		int ditdex = ditx * 4 + dity; // 4x4!
+		
+		pe1.r = pe1.r * 255;
+		pe1.g = pe1.g * 255;
+		pe1.b = pe1.b * 255;
+		
+		// looping through a lookup table matrix
+		//for (yeh=ditdex; yeh<(ditdex+16); yeh++) ohyes = pow(erroredtable[yeh-15], 0.72f);
+		// Unfortunately, RetroArch doesn't support loops so I have to unroll this. =(
+		// Dither method adapted from xTibor on Shadertoy ("Ordered Dithering"), generously
+		// put into the public domain.  Thanks!
+		if (yeh++==ditdex) ohyes = erroredtable[0];
+		else if (yeh++==ditdex) ohyes = erroredtable[1];
+		else if (yeh++==ditdex) ohyes = erroredtable[2];
+		else if (yeh++==ditdex) ohyes = erroredtable[3];
+		else if (yeh++==ditdex) ohyes = erroredtable[4];
+		else if (yeh++==ditdex) ohyes = erroredtable[5];
+		else if (yeh++==ditdex) ohyes = erroredtable[6];
+		else if (yeh++==ditdex) ohyes = erroredtable[7];
+		else if (yeh++==ditdex) ohyes = erroredtable[8];
+		else if (yeh++==ditdex) ohyes = erroredtable[9];
+		else if (yeh++==ditdex) ohyes = erroredtable[10];
+		else if (yeh++==ditdex) ohyes = erroredtable[11];
+		else if (yeh++==ditdex) ohyes = erroredtable[12];
+		else if (yeh++==ditdex) ohyes = erroredtable[13];
+		else if (yeh++==ditdex) ohyes = erroredtable[14];
+		else if (yeh++==ditdex) ohyes = erroredtable[15];
+
+		// Adjust the dither thing
+		ohyes = 17 - (ohyes - 1); // invert
+		ohyes *= DITHER_AMOUNT;
+		ohyes += DITHER_BIAS;
+
+		colord.r = pe1.r + ohyes;
+		colord.g = pe1.g + (ohyes / 2);
+		colord.b = pe1.b + ohyes;
+		pe1.rgb = colord.rgb * 0.003921568627451; // divide by 255, i don't trust em
+	#endif
+	
 	// *****************
 	// STAGE 2
 	// Reduce color depth of sampled pixels....
@@ -130,20 +205,47 @@ void PS_LeiFX_Gamma(in float4 pos : SV_POSITION, in float2 uv : TEXCOORD0, out f
 	float gammaed = 0.3;
 	float leifx_linegamma = gammaed;
 	float leifx_liney =  0.0078125;0.01568 / 2; // 0.0390625
+	
+	#if (USE_RAMDAC == 1)
+		float2 res;
+		res.x = ReShade::ScreenSize.x;
+		res.y = ReShade::ScreenSize.y;
+		
+		float3 pe1 = tex2D(ReShade::BackBuffer, uv); // first pixel...
+		float2 ditheu = uv.xy * res.xy;
+		ditheu.x = uv.x * res.x;
+		ditheu.y = uv.y * res.y;
+		
+		leifx_linegamma = (LEIFX_LINES / 10);
+		float horzline1 = 	(fmod(ditheu.y, 2.0));
+		if (horzline1 < 1)	leifx_linegamma = 0;
+		
+		pe1.r += leifx_linegamma;
+		pe1.g += leifx_linegamma;
+		pe1.b += leifx_linegamma;
+	#endif
 
     // Sampling The Texture And Passing It To The Frame Buffer 
     col = tex2D(ReShade::BackBuffer, uv); 
-
 	
  	float lines = fmod(col.y, 2.0);	// I realize the 3dfx doesn't actually line up the picture in the gamma process
 
-	//if (lines < 1.0) leifx_linegamma = 0;
-	if (lines < 1.0) 	leifx_liney = 0;
+	#if (USE_RAMDAC == 1)
+		if (lines < 1.0) leifx_linegamma = 0;
+	#else
+		if (lines < 1.0) 	leifx_liney = 0;
+	#endif
 
-//	gl_FragColor.r += leifx_liney;	// it's a slight purple line.
-//	gl_FragColor.b += leifx_liney;	// it's a slight purple line.
+	#if (USE_RAMDAC == 1)
+		col.r += leifx_liney;	// it's a slight purple line.
+		col.b += leifx_liney;	// it's a slight purple line.
+	#endif
 
 	float leifx_gamma = 1.0 + gammaed;// + leifx_linegamma;
+	
+	#if (USE_RAMDAC == 1)
+		leifx_gamma = 1.0 + leifx_linegamma;
+	#endif
 
 	col.r = pow(col.r, 1.0 / leifx_gamma);
 	col.g = pow(col.g, 1.0 / leifx_gamma);
