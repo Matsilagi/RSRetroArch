@@ -71,9 +71,9 @@ float4 PS_NewPixie_Accum(float4 pos : SV_Position, float2 uv : TEXCOORD0) : SV_T
    return max( a, b * 0.96 );
 }
 
-//PASS 2
-texture GaussianBlurHorzTex { Width = BUFFER_WIDTH; Height = BUFFER_HEIGHT; Format = RGBA8; };
-sampler GaussianBlurHorzSampler { Texture = GaussianBlurHorzTex;};
+//PASS 2 AND 3
+texture GaussianBlurTex { Width = BUFFER_WIDTH; Height = BUFFER_HEIGHT; Format = RGBA8; };
+sampler GaussianBlurSampler { Texture = GaussianBlurTex;};
 
 uniform float blur_x <
 	ui_type = "drag";
@@ -83,9 +83,17 @@ uniform float blur_x <
 	ui_label = "Horizontal Blur [CRT-NewPixie]"; 
 > = 1.0;
 
-float4 PS_NewPixie_BlurH(float4 pos : SV_Position, float2 uv_tx : TEXCOORD0) : SV_Target
+uniform float blur_y <
+	ui_type = "drag";
+	ui_min = 0.0;
+	ui_max = 5.0;
+	ui_step = 0.25;
+	ui_label = "Vertical Blur [CRT-NewPixie]";
+> = 1.0;
+
+float4 PS_NewPixie_Blur(float4 pos : SV_Position, float2 uv_tx : TEXCOORD0) : SV_Target
 {
-   float2 blur = float2(blur_x, 0.0) * ReShade::PixelSize.xy;
+   float2 blur = float2(blur_x, blur_y) * ReShade::PixelSize.xy;
    float2 uv = uv_tx.xy;
    float4 sum = tex2D( ReShade::BackBuffer, uv ) * 0.2270270270;
    sum += tex2D(ReShade::BackBuffer, float2( uv.x - 4.0 * blur.x, uv.y - 4.0 * blur.y ) ) * 0.0162162162;
@@ -97,36 +105,6 @@ float4 PS_NewPixie_BlurH(float4 pos : SV_Position, float2 uv_tx : TEXCOORD0) : S
    sum += tex2D(ReShade::BackBuffer, float2( uv.x + 3.0 * blur.x, uv.y + 3.0 * blur.y ) ) * 0.0540540541;
    sum += tex2D(ReShade::BackBuffer, float2( uv.x + 4.0 * blur.x, uv.y + 4.0 * blur.y ) ) * 0.0162162162;
    return sum;
-}
-
-//PASS 3
-uniform float blur_y <
-	ui_type = "drag";
-	ui_min = 0.0;
-	ui_max = 5.0;
-	ui_step = 0.25;
-	ui_label = "Vertical Blur [CRT-NewPixie]";
-> = 1.0;
-
-texture GaussianBlurVertTex { Width = BUFFER_WIDTH; Height = BUFFER_HEIGHT; Format = RGBA8; };
-sampler GaussianBlurVertSampler { Texture = GaussianBlurVertTex;};
-
-float4 PS_NewPixie_BlurV(float4 pos: SV_Position, float2 uv_tx : TEXCOORD0) : SV_Target
-{
-	float2 blur = float2(0.0, blur_y) * ReShade::PixelSize.xy;
-	
-	float2 uv = uv_tx.xy;
-	float4 sum = tex2D( GaussianBlurHorzSampler, uv ) * 0.2270270270;
-	sum += tex2D(GaussianBlurHorzSampler, float2( uv.x - 4.0 * blur.x, uv.y - 4.0 * blur.y ) ) * 0.0162162162;
-	sum += tex2D(GaussianBlurHorzSampler, float2( uv.x - 3.0 * blur.x, uv.y - 3.0 * blur.y ) ) * 0.0540540541;
-	sum += tex2D(GaussianBlurHorzSampler, float2( uv.x - 2.0 * blur.x, uv.y - 2.0 * blur.y ) ) * 0.1216216216;
-	sum += tex2D(GaussianBlurHorzSampler, float2( uv.x - 1.0 * blur.x, uv.y - 1.0 * blur.y ) ) * 0.1945945946;
-	sum += tex2D(GaussianBlurHorzSampler, float2( uv.x + 1.0 * blur.x, uv.y + 1.0 * blur.y ) ) * 0.1945945946;
-	sum += tex2D(GaussianBlurHorzSampler, float2( uv.x + 2.0 * blur.x, uv.y + 2.0 * blur.y ) ) * 0.1216216216;
-	sum += tex2D(GaussianBlurHorzSampler, float2( uv.x + 3.0 * blur.x, uv.y + 3.0 * blur.y ) ) * 0.0540540541;
-	sum += tex2D(GaussianBlurHorzSampler, float2( uv.x + 4.0 * blur.x, uv.y + 4.0 * blur.y ) ) * 0.0162162162;
-	
-	return sum;
 }
 
 //PASS 4
@@ -227,13 +205,13 @@ float4 PS_NewPixie_Final(float4 pos: SV_Position, float2 uv_tx : TEXCOORD0) : SV
     
     /* Ghosting */
     float ghs = 0.15;
-    float3 r = tsample(GaussianBlurVertSampler, float2(x-0.014*1.0, -0.027)*0.85+0.007*float2( 0.35*sin(1.0/7.0 + 15.0*curved_uv.y + 0.9*time), 
+    float3 r = tsample(GaussianBlurSampler, float2(x-0.014*1.0, -0.027)*0.85+0.007*float2( 0.35*sin(1.0/7.0 + 15.0*curved_uv.y + 0.9*time), 
         0.35*sin( 2.0/7.0 + 10.0*curved_uv.y + 1.37*time) )+float2(scuv.x+0.001,scuv.y+0.001),
         5.5+1.3*sin( 3.0/9.0 + 31.0*curved_uv.x + 1.70*time),resolution).xyz*float3(0.5,0.25,0.25);
-    float3 g = tsample(GaussianBlurVertSampler, float2(x-0.019*1.0, -0.020)*0.85+0.007*float2( 0.35*cos(1.0/9.0 + 15.0*curved_uv.y + 0.5*time), 
+    float3 g = tsample(GaussianBlurSampler, float2(x-0.019*1.0, -0.020)*0.85+0.007*float2( 0.35*cos(1.0/9.0 + 15.0*curved_uv.y + 0.5*time), 
         0.35*sin( 2.0/9.0 + 10.0*curved_uv.y + 1.50*time) )+float2(scuv.x+0.000,scuv.y-0.002),
         5.4+1.3*sin( 3.0/3.0 + 71.0*curved_uv.x + 1.90*time),resolution).xyz*float3(0.25,0.5,0.25);
-    float3 b = tsample(GaussianBlurVertSampler, float2(x-0.017*1.0, -0.003)*0.85+0.007*float2( 0.35*sin(2.0/3.0 + 15.0*curved_uv.y + 0.7*time), 
+    float3 b = tsample(GaussianBlurSampler, float2(x-0.017*1.0, -0.003)*0.85+0.007*float2( 0.35*sin(2.0/3.0 + 15.0*curved_uv.y + 0.7*time), 
         0.35*cos( 2.0/3.0 + 10.0*curved_uv.y + 1.63*time) )+float2(scuv.x-0.002,scuv.y+0.000),
         5.3+1.3*sin( 3.0/7.0 + 91.0*curved_uv.x + 1.65*time),resolution).xyz*float3(0.25,0.25,0.5);
 		
@@ -308,18 +286,11 @@ technique CRTNewPixie
 		RenderTarget = tAccTex;
 	}
 	
-	pass PS_CRTNewPixie_BlurHorz
+	pass PS_CRTNewPixie_Blur
 	{
 		VertexShader = PostProcessVS;
-		PixelShader = PS_NewPixie_BlurH;
-		RenderTarget = GaussianBlurHorzTex;
-	}
-	
-	pass PS_CRTNewPixie_BlurVert
-	{
-		VertexShader = PostProcessVS;
-		PixelShader = PS_NewPixie_BlurV;
-		RenderTarget = GaussianBlurVertTex;
+		PixelShader = PS_NewPixie_Blur;
+		RenderTarget = GaussianBlurTex;
 	}
 	
 	pass PS_CRTNewPixie_Final
