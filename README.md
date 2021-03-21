@@ -55,6 +55,7 @@
  - BasicCRT by the8bitpimp: A really basic blue / frosted-glass like CRT shader with flickering. (https://the8bitpimp.wordpress.com/2014/07/17/retro-crt-shader/)
  - Cathode by nimitz: Creates a shadowmask / grid similar to a CRT display. (https://www.shadertoy.com/view/4lXcDH)
  - CRT-CX by PixelPaladin: A CRT shader module for Cerberus X (https://github.com/PixelPaladin/cx-crt)
+ - CRT-Kurg by kurg: A very simple CRT + scanlines shader made for RetroPie by Kurg. (https://github.com/mcgurk/RetrOrangePi_shaders)
  - Customizable NTSC Filter w/ AM by Hatchling: A NTSC Encode and Decode filter with AM noise. Really mimics bad RF cables and old TV analog signal with interference. (https://www.shadertoy.com/view/wlScWG)
  - LCD Post Effect by MenacingMecha: Makes the screen look like a Backlit LCD display, not really useful but might look eye-candy for some (https://www.shadertoy.com/view/ldBfDd)
  - MattiasCRT by Mattias: Ported from Shadertoy, based on the work of inigo quilez. (https://www.shadertoy.com/view/lsB3DV)
