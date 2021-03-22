@@ -27,6 +27,7 @@
  - EGAFilter by ???: Taken from DOSBox, meant to mimic an EGA display, with very, VERY limited color depth.
  - FakeLottes by hunterk: A scanlines + crt curvature shader using Lottes masks. Used as an alternative to CRT-Lottes for low power GPUs and Raspberry systems.
  - GTUv50 by aliaspider: Less meant to mimic the physical CRT appearance and more the signals interpreted by them, this works as a NTSC-shader with scanlines mostly. Due to its flexibility with blurring, can be easily used to fix / re-blend dithering effects in old games. Requires a somewhat-powerful PC in certain values.
+ - lcd_grid by cgwg: Meant to mimic a LCD grid display of handheld / portable consoles.
  - LeiFX_OA (3DFX) by LeiLei: Same as 3DFX, but ported from OpenArena, supposedly, that one is more updated than the RetroArch or SweetFX versions.
  - MCAmber,Green and Orange by ???: Taken from DOSBox, made to mimic monochrome phosphor displays. It basically just tints the screen, nothing too special about them.
  - MMJCelShader by MMJuno: A port of an old shader from Pete's OGL2 plugin for ePSXe. Adds cel-shading and posterizing to the image, giving it a cartoon-ish look.
@@ -62,6 +63,7 @@
  - MetaCRT by P_Malin: Phosphor Mask / 2D part of the MetaCRT Shadertoy by P_Malin (https://www.shadertoy.com/view/4dlyWX)
  - Needs More JPEG by rory618: Applies DCT compression used by the JPEG file format. (https://www.shadertoy.com/view/llfyz4)
  - NTSC Decoder by xot: Same concept as Artifact Colors, infact, im using its siginal modulator coupled with specific values from this demodulator to get the result equal, not exactly how i do my ports, but hey, it works! (https://www.shadertoy.com/view/Mdffz7)
+ - RGB LCD screen by forthcharlie: A LCD Display grid, similar to the phosphor pattern of MetaCRT (https://www.shadertoy.com/view/3sGXWc)
  - TV CRT Pixels by iq: Mimics the Shadow-Mask / Slot-Mask of a CRT TV. (https://www.shadertoy.com/view/XsfGDl)
  - VHS by Various Authors: The good old VHS shader from the ReShade Framework. A mishmash of VHS-related shadertoys + the MAME NTSC shader, all joined in to create a old VHS-tape visual.
  - vt220 by sprash3: Meant to mimic a vt220 terminal, also includes the Night version + a version with the Frame only so you can fit your own screen data inside it. (https://www.shadertoy.com/view/MtBXW3)
