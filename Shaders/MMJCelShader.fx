@@ -109,7 +109,7 @@ uniform float ShdWeight <
 	ui_label = "Shader Strength [MMJCelShader]";
 > = 0.50;
 
-sampler RetroArchSRGB { Texture = ReShade::BackBufferTex; MinFilter = RESHADEFILTERMODE; MagFilter = RESHADEFILTERMODE; MipFilter = RESHADEFILTERMODE; SRGBTexture = true;};
+sampler RetroArchSRGB { Texture = ReShade::BackBufferTex; MinFilter = LINEAR; MagFilter = LINEAR; MipFilter = LINEAR; SRGBTexture = true;};
 
 #define mod(x,y) (x-y*floor(x/y))
 
