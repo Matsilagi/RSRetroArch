@@ -67,6 +67,8 @@ uniform float Timer < source = "timer"; >;
 #define t Timer.x*0.001
 #define t2 Timer*0.001
  
+#define mod(x,y) (x-y*floor(x/y)) 
+
 float4 CompositeSample(float2 texcoord)
  {
     float2 InverseRes = 1.0 / ReShade::ScreenSize.xy;
@@ -296,16 +298,16 @@ float ramp(float y, float start, float end)
 float stripes(float2 uv)
 {
     float noi = noise(uv*float2(0.5,1.) + float2(1.,3.));
-    return ramp((uv.y*4.0 + t2/2.+sin(t2 + sin(t2*0.63)) % 2.0),0.5,0.6)*noi;
+    return ramp(mod(uv.y*4.0 + t2/2.+sin(t2 + sin(t2*0.63)),2.0),0.5,0.6)*noi;
 }
  
 float3 getVideo(float2 uv)
 {
     float2 look = uv;
-    float window = 1.0/(1.0+20.0*(look.y-(t2/4.0 % 2.2))*(look.y-(t2/4.0 % 2.0))); //this was broken
+    float window = 1.0/(1.0+20.0*(look.y-(mod(t2/4.0,2.2))*(look.y-(mod(t2/4.0,2.0))))); //this was broken
     look.x = look.x + sin(look.y*10. + t2)/500.*onOff(4.,4.,.3)*(1.+cos(t2*80.))*window;
     float vShift = 5.4*onOff(2.,3.,.9)*(sin(t2)*sin(t2*20.) + (0.5 + 0.1*sin(t2*200.)*cos(t2)));
-    look.y = (look.y + vShift % 2.0); //this too
+    look.y = (mod(look.y + vShift,2.0)); //this too
     float3 video = tex2D(ReShade::BackBuffer,look).rgb;
     return video;
 }
@@ -341,7 +343,7 @@ float rand(float2 co)
         float b = 78.233;
         float c = 43758.5453;
         float dst= dot(co.xy ,float2(a,b));
-        float snm= dst % 3.14; //this was broken aswell
+        float snm= mod(dst,3.14); //this was broken aswell
         return frac(sin(snm) * c);
 }
  
