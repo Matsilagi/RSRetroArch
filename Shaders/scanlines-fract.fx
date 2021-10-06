@@ -35,7 +35,7 @@ uniform float THICKNESS <
 uniform float DARKNESS <
 	ui_type = "drag";
 	ui_min = 0.0;
-	ui_max 1.0;
+	ui_max = 1.0;
 	ui_step = 0.05;
 	ui_label = "Scanline Darkness [Scanlines-fract]"; 
 > = 0.50;
@@ -64,7 +64,7 @@ float3 YIQtoRGB(float3 YIQ){
 	return mul(YIQ,rgbmat);
 }
 
-float4 PS_ScanlinesAbs(float4 pos : SV_POSITION0, float2 tex : TEXCOORD0) : SV_TARGET 
+float4 PS_ScanlinesAbs(float4 pos : SV_POSITION, float2 tex : TEXCOORD0) : SV_TARGET 
 {
 	float lines = frac(tex.y * video_size.y);
 	float scale_factor = floor((ReShade::ScreenSize.y / video_size.y) + 0.4999);
@@ -73,7 +73,7 @@ float4 PS_ScanlinesAbs(float4 pos : SV_POSITION0, float2 tex : TEXCOORD0) : SV_T
 	screen.r *= BRIGHTBOOST;
 	screen.rgb = YIQtoRGB(screen.rgb);
 
-    return (lines > (1.0 / scale_factor * THICKNESS)) ? screen : screen * float4(1.0 - DARKNESS);
+    return (lines > (1.0 / scale_factor * THICKNESS)) ? screen : screen * float4(1.0 - DARKNESS,1.0 - DARKNESS,1.0 - DARKNESS,1.0 - DARKNESS);
 }
 
 technique Scanlinesfract {

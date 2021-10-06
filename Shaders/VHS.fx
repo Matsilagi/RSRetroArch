@@ -268,7 +268,7 @@ void PS_VHS3(float4 vpos : SV_Position, float2 texcoord : TEXCOORD, out float4 O
  
     float col = nn(-uv.xy);
  
-    origcolor2 += dot(col,0.233);
+    origcolor2 += dot(col, float4(0.233,0.233,0.233,0.233));
    
     OutGet = origcolor2;
 }

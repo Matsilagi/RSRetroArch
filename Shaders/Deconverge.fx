@@ -40,7 +40,7 @@ uniform float3 RadialConvergeY <
 //DEV NOTE: Even if they have those options, best to leave them to same or the best looking, since ReShade can't go that deep on injection
 uniform float2 ScreenDims <
 	ui_type = "drag";
-	ui_min 1.0;
+	ui_min = 1.0;
 	ui_max = 100000.0;
 	ui_step = 1.0;
 	ui_label = "Screen Dimensions [Converge]";
@@ -49,7 +49,7 @@ uniform float2 ScreenDims <
 
 uniform float2 TargetDims <
 	ui_type = "drag";
-	ui_min 1.0;
+	ui_min = 1.0;
 	ui_max = 100000.0;
 	ui_step = 1.0;
 	ui_label = "Target Dimensions [Converge]";
@@ -57,7 +57,7 @@ uniform float2 TargetDims <
 > = float2(320.0,240.0);
 
 
-float4 PS_Deconverge(float4 vpos : SV_Position0, float2 texcoord : TEXCOORD0) : SV_Target0)
+float4 PS_Deconverge(float4 vpos : SV_Position, float2 texcoord : TEXCOORD0) : SV_Target0
 {
 	vpos.xy /= ReShade::ScreenSize.xy;
 	vpos.y = 1.0f - texcoord.y; // flip y
