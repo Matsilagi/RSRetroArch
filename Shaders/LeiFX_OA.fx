@@ -9,7 +9,7 @@
 
 // New undither version
 
-#include "ReShade.fxh";
+#include "ReShade.fxh"
 
 //16-BIT DITHER VARIABLES
 
