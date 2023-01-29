@@ -28,10 +28,10 @@ sampler2D samplerMDAPTPassB { Texture = texMDAPTPassB; };
 
 
 uniform bool MDAPTMODE  <
-        ui_label   = "Monochrome Analysis";
+		ui_label   = "Monochrome Analysis";
 > = false;
 uniform bool VL   <
-        ui_label   = "Vertical Lines";
+		ui_label   = "Vertical Lines";
 > = false;
 uniform bool CB   <
 		ui_label   = "Checkerboard";
@@ -43,39 +43,39 @@ uniform bool linear_gamma   <
 		ui_label   = "Linear Gamma Blend";
 > = false;
 uniform float MDAPTPWR   <
-        ui_label   = "Color Metric Exp";
-        ui_type    = "slider";
-        ui_min     = 0;
-        ui_max     = 10;
-        ui_step    = 0.1;
+		ui_label   = "Color Metric Exp";
+		ui_type    = "slider";
+		ui_min     = 0;
+		ui_max     = 10;
+		ui_step    = 0.1;
 > = 2;
 uniform float VL_LO   <
-        ui_label   = "VL LO Thresh";
-        ui_type    = "slider";
-        ui_min     = 0;
-        ui_max     = 10;
-        ui_step    = 0.05;
+		ui_label   = "VL LO Thresh";
+		ui_type    = "slider";
+		ui_min     = 0;
+		ui_max     = 10;
+		ui_step    = 0.05;
 > = 1.25;
 uniform float VL_HI   <
-        ui_label   = "VL HI Thresh";
-        ui_type    = "slider";
-        ui_min     = 0;
-        ui_max     = 10;
-        ui_step    = 0.05;
+		ui_label   = "VL HI Thresh";
+		ui_type    = "slider";
+		ui_min     = 0;
+		ui_max     = 10;
+		ui_step    = 0.05;
 > = 1.75;
 uniform float CB_LO   <
-        ui_label   = "CB LO Thresh";
-        ui_type    = "slider";
-        ui_min     = 0;
-        ui_max     = 25;
-        ui_step    = 0.05;
+		ui_label   = "CB LO Thresh";
+		ui_type    = "slider";
+		ui_min     = 0;
+		ui_max     = 25;
+		ui_step    = 0.05;
 > = 5.25;
 uniform float CB_HI   <
-        ui_label   = "CB HI Thresh";
-        ui_type    = "slider";
-        ui_min     = 0;
-        ui_max     = 25;
-        ui_step    = 0.05;
+		ui_label   = "CB HI Thresh";
+		ui_type    = "slider";
+		ui_min     = 0;
+		ui_max     = 25;
+		ui_step    = 0.05;
 > = 5.75;
 
 uniform float2 scaling_factor <
@@ -85,8 +85,6 @@ uniform float2 scaling_factor <
 		ui_max     = 12;
 		ui_step    = 0.1;
 > = 1;
-
-
 
 
 #define dotfix(x,y) saturate(dot(x,y))
@@ -168,22 +166,23 @@ float2 sigmoid(float2 signal){
 }
 
 
+
 // Sampling ReShade::BackBuffer is expensive.
 //   Sampling from an intermediate texture is not.
 void sampleScreenPS(
-    in float4 pos : SV_Position,
-    in float2 texcoord : TEXCOORD0,
-    
-    out float4 color : SV_Target
+	in float4 pos : SV_Position,
+	in float2 texcoord : TEXCOORD0,
+	
+	out float4 color : SV_Target
 ) {
 	color = tex2D(ReShade::BackBuffer, texcoord);
 }
 
 void pass0PS(
-    in float4 pos : SV_Position,
-    in float2 texcoord : TEXCOORD0,
-    
-    out float4 color : SV_Target
+	in float4 pos : SV_Position,
+	in float2 texcoord : TEXCOORD0,
+	
+	out float4 color : SV_Target
 ) {
 	/*
 		  U
@@ -217,10 +216,10 @@ void pass0PS(
 }
 
 void pass1PS(
-    in float4 pos : SV_Position,
-    in float2 texcoord : TEXCOORD0,
-    
-    out float4 color : SV_Target
+	in float4 pos : SV_Position,
+	in float2 texcoord : TEXCOORD0,
+	
+	out float4 color : SV_Target
 ) {
 	/*
 		UL U UR
@@ -250,10 +249,10 @@ void pass1PS(
 }
 
 void pass2PS(
-    in float4 pos : SV_Position,
-    in float2 texcoord : TEXCOORD0,
-    
-    out float4 color : SV_Target
+	in float4 pos : SV_Position,
+	in float2 texcoord : TEXCOORD0,
+	
+	out float4 color : SV_Target
 ) {
 	/*
 		NW  UUL U2 UUR NE
@@ -306,10 +305,10 @@ void pass2PS(
 }
 
 void pass3PS(
-    in float4 pos : SV_Position,
-    in float2 texcoord : TEXCOORD0,
-    
-    out float4 color : SV_Target
+	in float4 pos : SV_Position,
+	in float2 texcoord : TEXCOORD0,
+	
+	out float4 color : SV_Target
 ) {
 	/*
 		UL U UR
@@ -345,12 +344,11 @@ void pass3PS(
    color = C;
 }
 
-
 void pass4PS(
-    in float4 pos : SV_Position,
-    in float2 texcoord : TEXCOORD0,
-    
-    out float4 color : SV_Target
+	in float4 pos : SV_Position,
+	in float2 texcoord : TEXCOORD0,
+	
+	out float4 color : SV_Target
 ) {
 	/*
 		UL U UR
