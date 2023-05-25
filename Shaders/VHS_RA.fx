@@ -1,3 +1,9 @@
+// VHS shader
+// by hunterk
+// adapted from ompuco's more AVdistortion shadertoy:
+// https://www.shadertoy.com/view/XlsczN
+// Ported to ReShade by Matsilagi
+
 #include "ReShade.fxh"
 
 uniform float wiggle <
