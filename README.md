@@ -31,7 +31,6 @@
  - LeiFX_OA (3DFX) by LeiLei: Same as 3DFX, but ported from OpenArena, supposedly, that one is more updated than the RetroArch or SweetFX versions.
  - MCAmber,Green and Orange by ???: Taken from DOSBox, made to mimic monochrome phosphor displays. It basically just tints the screen, nothing too special about them.
  - MMJCelShader by MMJuno: A port of an old shader from Pete's OGL2 plugin for ePSXe. Adds cel-shading and posterizing to the image, giving it a cartoon-ish look.
- - N64-3Point by cyrb: A port of the N64 3-point bilinear filtering. Made to be used with pixel-games in mind. Might or might not look good, based on a shadertoy. (https://www.shadertoy.com/view/Ws2fWV)
  - newpixie-CRT by Mattias Gustavsson: Part of his Newpixie library, this shader adds a CRT-like screen with curvature, color distortion, scanlines and some interference / blur.
  - nGlide 3DFX by Zeus Software: A port of the experimental 3DFX dithering and RAMDAC filtering used in nGlide. It is accurate to the old GPUs and not meant to mimic them, so, lower resolutions will look better with it.
  - NTSC by Themaister and cgwg: A shader that mimics NTSC Crosstalk and signal. Comes with a few options and a variation with no scanlines for those who just want to use the signal part with another CRT shader bundled.
@@ -43,7 +42,7 @@
  - Scanlines-Fract by hunterk: Similar to the Scanlines-Abs, but using a frac operation. May look thicker and darker on some cases, but works better with non-integer scaled games.
  - SGENPT-mul by Hyllian: A shader that attempts to blur / join the dithering of Sega Genesis games. Works somewhat ok.
  - Technicolor by hunterk: A Technicolor shader meant to mimic old cartoons and suchs. Inspired partly by Cuphead.
- - VHS by hunterk: A VHS-like shader ported from a shadertoy snippet named "more AVdistortion". (https://www.shadertoy.com/view/XlsczN)
+ - VHS by hunterk: A VHS-like shader ported from RetroArch. Based on a shadertoy snippet named "more AVdistortion" by ompuco. Does not include Rewind or text effects. (https://www.shadertoy.com/view/XlsczN)
  - zfast_crt by SoltanGris42: An ultra-lightweight CRT shader. Made to work fast on integrated gpus, while looking good. Designed for 1080p displays.
  
  There are also a few shaders from MAME included, those are:
@@ -63,6 +62,7 @@
  - LCD Post Effect by MenacingMecha: Makes the screen look like a Backlit LCD display, not really useful but might look eye-candy for some (https://www.shadertoy.com/view/ldBfDd)
  - MattiasCRT by Mattias: Ported from Shadertoy, based on the work of inigo quilez. (https://www.shadertoy.com/view/lsB3DV)
  - MetaCRT by P_Malin: Phosphor Mask / 2D part of the MetaCRT Shadertoy by P_Malin (https://www.shadertoy.com/view/4dlyWX)
+ - N64-3Point by cyrb: A port of the N64 3-point bilinear filtering. Made to be used with pixel-games in mind. Might or might not look good. (https://www.shadertoy.com/view/Ws2fWV)
  - Needs More JPEG by rory618: Applies DCT compression used by the JPEG file format. (https://www.shadertoy.com/view/llfyz4)
  - NTSC Decoder by xot: Same concept as Artifact Colors, infact, im using its siginal modulator coupled with specific values from this demodulator to get the result equal, not exactly how i do my ports, but hey, it works! (https://www.shadertoy.com/view/Mdffz7)
  - RGB LCD screen by forthcharlie: A LCD Display grid, similar to the phosphor pattern of MetaCRT (https://www.shadertoy.com/view/3sGXWc)
