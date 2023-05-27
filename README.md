@@ -76,6 +76,10 @@ Those repositories might also have something you like, make sure to check them o
 
 [akgunter/crt-royale-reshade](https://github.com/akgunter/crt-royale-reshade) - A port of the most accurate and feature filled CRT shader of RetroArch for ReShade. Original work by TroggleMonkey, ReShade port by akgunter. 
 
+[guestr/ReshadeShaders](https://github.com/guestrr/ReshadeShaders) - A few shaders of RetroArch from its original author. It doesn't get more faithful than this.
+
+[guestr/WinUAE-Shaders/ReShadeShaders](https://github.com/guestrr/WinUAE-Shaders/tree/master/ReshadeShaders) - WinUAE CRT Shaders ported to ReShade. WinUAE is a Commodore Amiga emulator. It might look cool for vintage PC presets.
+
 [luluco250/FXShaders](https://github.com/luluco250/FXShaders) - luluco's shader repository. Probably listed at the big ReShade ones, but worth mentioning here.
 
 [Matsilagi/RSJankShaders](https://github.com/Matsilagi/RSJankShaders) - Random experiments, small codes and shaders that doesn't fit any other criteria here. Made mostly for curiosity purposes and archival.
