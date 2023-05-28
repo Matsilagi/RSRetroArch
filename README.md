@@ -6,6 +6,7 @@
  The Shaders included here comes mostly from [libretro/common-shaders](https://github.com/libretro/common-shaders) , but there are some from other sources aswell, below are a list of shaders, where they came from, and what they do:
  - 3DFX by LeiLei: attempts to mimic the VGA / RAMDAC cables, color dithering and screen quality of 3DFX cards, more specifically Vooodoo 2/3. Long gone from the RetroArch Shader repository. Also available as LeiFX_OA, with more updated versions and different tweaks.
  - ArtifactColors by FlyGuy: Uses a signal modulation created trough NTSC artifacting, to generate colors, pretty much like Apple II's low-res mode.
+ - Chromaticity by metallic77: Allows to change the signal (video and color) options.
  - CMYK Halftone Dot by hunterk: Originally made as a WebGL Demo by Stefan Gustavson, simulates the halftone dots used in CMYK prints, useful for magazine-like shots.
  - CoolRetroTerminal by Swordfish90: Originally from a Linux app [Swordfish90/cool-retro-term](https://github.com/Swordfish90/cool-retro-term) , i ported its Pixel Shader from QT a long time ago, its not by any means up-to-date, but still looks ultra-similar to how CoolRetroTerm works so, i guess its still useable. A big buggy and without bloom, but most of its features work fine.
  - CRT-Aperture by ???: Couldn't find the Author name, but seems like a modified CRT-Easymode made to mimic more a Trinitron display.
