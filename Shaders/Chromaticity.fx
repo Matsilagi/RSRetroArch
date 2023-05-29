@@ -157,9 +157,9 @@ uniform float GAMMAOUT <
 	ui_label = "Gamma Out [Chromaticity]";
 > = 2.2;
 
-uniform float3 WHITE = float3(1.0, 1.0, 1.0);
+static const float3 WHITE = float3(1.0, 1.0, 1.0);
 
-uniform float3x3 XYZ_TO_sRGB = float3x3(
+static const float3x3 XYZ_TO_sRGB = float3x3(
 	3.2406255, -0.9689307,  0.0557101,
     -1.5372080,  1.8758561, -0.2040211,
     -0.4986286,  0.0415175,  1.0569959);
