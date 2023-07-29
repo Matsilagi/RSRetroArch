@@ -109,12 +109,9 @@ texture tFrameCX < source = "crt-cx/tvscreen.png"; >
 	Width = 1024;
 	Height = 1024;
 	MipLevels = 1;
-	
-    MinFilter = LINEAR;
-    MagFilter = LINEAR;
 };
 
-sampler sFrameCX { Texture = tFrameCX; AddressU = BORDER; AddressV = BORDER;};
+sampler sFrameCX { Texture = tFrameCX; AddressU = BORDER; AddressV = BORDER; MinFilter = LINEAR; MagFilter = LINEAR;};
 
 float4 PS_CRTCX(float4 pos: SV_Position, float2 uv_tx : TEXCOORD0) : SV_Target
 {
