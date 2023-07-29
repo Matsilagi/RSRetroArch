@@ -114,12 +114,9 @@ texture tFrame < source = "crt-newpixie/crtframe.png"; >
 	Width = 1024;
 	Height = 1024;
 	MipLevels = 1;
-	
-    MinFilter = LINEAR;
-    MagFilter = LINEAR;
 };
 
-sampler sFrame { Texture = tFrame; AddressU = BORDER; AddressV = BORDER;};
+sampler sFrame { Texture = tFrame; AddressU = BORDER; AddressV = BORDER; MinFilter = LINEAR; MagFilter = LINEAR;};
 
 uniform bool use_frame <
 	ui_type = "boolean";
