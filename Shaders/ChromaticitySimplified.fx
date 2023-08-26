@@ -7,6 +7,13 @@ uniform int COLOR_MODE <
 	ui_tooltip = "Change the color standard.";
 > = 1;
 
+uniform int Dx <
+	ui_type = "combo";
+	ui_items = "D50\0D55\0D60\0D65\0D75\0";
+	ui_label = "Temperature [Cromaticity-Simplified]";
+	ui_tooltip = "Change the color temperature.";
+> = 1;
+
 static const float3 WHITE = float3(1.0, 1.0, 1.0);
 
 static const float3x3 XYZ_TO_sRGB = float3x3(
@@ -264,6 +271,15 @@ float3 srgb_gamma(const float3 x)
     return float3(srgb_gamma(x.r), srgb_gamma(x.g), srgb_gamma(x.b));
 }
 
+float3 TEMP ()
+{
+    if (Dx == 0.0) return float3(0.964,1.0,0.8252);
+    else if (Dx == 1.0) return float3(0.95682,1.0,0.92149);
+    else if (Dx == 2.0) return float3(0.95047,1.0,1.0888);
+    else if (Dx == 3.0) return float3(0.94972,1.0,1.22638);
+    else return float3(1.0,1.0,1.0);
+}
+
 void PS_ChromaticitySimplified(in float4 pos : SV_POSITION, in float2 txcoord : TEXCOORD0, out float4 color : COLOR0)
 {
     float3x3 toRGB = colorspace_rgb();
@@ -273,7 +289,7 @@ void PS_ChromaticitySimplified(in float4 pos : SV_POSITION, in float2 txcoord : 
     float3 RGB = Yrgb_to_RGB(toRGB, W, Yrgb);
     
     RGB = clamp(RGB, 0.0, 1.0);
-    RGB = srgb_gamma(RGB);
+    RGB = srgb_gamma(RGB)*TEMP();
     color = float4(RGB, 1.0);
 }
 
