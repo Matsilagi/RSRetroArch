@@ -1,112 +1,112 @@
 /*
-	Ripped from Sonic Mania
+	Ported from RSDKV5U Decompile project
+	CRT-Sharp from Sonic Mania
 */
 
 #include "ReShade.fxh"
 
-float4 cmp(float4 src0, float4 src1, float4 src2) {
-	return float4(
-		src0.x >= 0 ? src1.x : src2.x,
-		src0.y >= 0 ? src1.y : src2.y,
-		src0.z >= 0 ? src1.z : src2.z,
-		src0.w >= 0 ? src1.w : src2.w
-	);
+uniform float pixel_sizeX <
+	ui_type = "drag";
+	ui_min = 1.0;
+	ui_max = BUFFER_WIDTH;
+	ui_label = "Internal Width [CRT-Yee64]";
+> = 320.0;
+
+uniform float pixel_sizeY <
+	ui_type = "drag";
+	ui_min = 1.0;
+	ui_max = BUFFER_HEIGHT;
+	ui_label = "Internal Height [CRT-Yee64]";
+> = 240.0;
+
+#define pixel_size float2(pixel_sizeX, pixel_sizeY)
+
+uniform float texture_sizeX <
+	ui_type = "drag";
+	ui_min = 1.0;
+	ui_max = BUFFER_WIDTH;
+	ui_label = "Screen Width [CRT-Yee64]";
+> = 320.0;
+
+uniform float texture_sizeY <
+	ui_type = "drag";
+	ui_min = 1.0;
+	ui_max = BUFFER_HEIGHT;
+	ui_label = "Screen Height [CRT-Yee64]";
+> = 240.0;
+
+#define texture_size float2(texture_sizeX, texture_sizeY)
+
+#define RSDK_PI 3.14159
+
+uniform int viewSizeHD <
+	ui_type = "drag";
+	ui_min = 1;
+	ui_max = BUFFER_HEIGHT;
+	ui_step = 1;
+	ui_label = "View Size HD [CRT-Yee64]";
+	ui_tooltip = "How tall ResolutionScale has to be before it simulates the dimming effect"; 
+> = 720;
+
+uniform float3 intencity <
+	ui_type = "drag";
+	ui_min = 0.0;
+	ui_max = 1.0;
+	ui_step = 0.001;
+	ui_label = "Dimming Intensity [CRT-Yee64]";
+	ui_tooltip = "How much to dim the screen when simulating the CRT effect.";
+> = float3(1.2, 0.9, 0.9);
+
+float4 PS_CRTYeetron(float4 pos : SV_Position, float2 coords : TEXCOORD0) : SV_Target
+{
+    float2 viewPos      = floor((texture_size.xy / pixel_size.xy) * coords.xy * ReShade::ScreenSize.xy) + 0.5;
+    float intencityPos  = frac((viewPos.y * 3.0 + viewPos.x) * 0.166667);
+
+    float4 scanlineIntencity;
+    if (intencityPos < 0.333)
+        scanlineIntencity.rgb = intencity.xyz;
+    else if (intencityPos < 0.666)
+        scanlineIntencity.rgb = intencity.zxy;
+    else
+        scanlineIntencity.rgb = intencity.yzx;
+
+    float2 pixelPos         = coords.xy * texture_size.xy;
+    float2 roundedPixelPos  = floor(pixelPos.xy);
+
+    scanlineIntencity.a = clamp(abs(sin(pixelPos.y * RSDK_PI)) + 0.25, 0.5, 1.0);
+    pixelPos.xy         = frac(pixelPos.xy) + -0.5;
+
+    float2 invTexPos = -coords.xy * texture_size.xy + (roundedPixelPos + 0.5);
+    
+    float2 newTexPos;
+    newTexPos.x = clamp(-abs(invTexPos.x * 0.5) + 1.5, 0.8, 1.25);
+    newTexPos.y = clamp(-abs(invTexPos.y * 2.0) + 1.25, 0.5, 1.0);
+
+    float2 colorMod;
+    colorMod.x = newTexPos.x * newTexPos.y;
+    colorMod.y = newTexPos.x * ((scanlineIntencity.a + newTexPos.y) * 0.5);
+
+    scanlineIntencity.a *= newTexPos.x;
+
+    float2 texPos   = ((pixelPos.xy + -clamp(pixelPos.xy, -0.25, 0.25)) * 2.0 + roundedPixelPos + 0.5) / texture_size.xy;
+    float4 texColor = tex2D(ReShade::BackBuffer, texPos.xy);
+
+    float3 blendedColor;
+    blendedColor.r  = scanlineIntencity.a * texColor.r;
+    blendedColor.gb = colorMod.xy * texColor.gb;
+
+    float4 outColor;
+    outColor.rgb    = ReShade::ScreenSize.y >= viewSizeHD ? (scanlineIntencity.rgb * blendedColor.rgb) : blendedColor.rgb;
+    outColor.a      = texColor.a;
+	
+	return outColor;
 }
 
-void PS_CRT_Yeetron(
-	float4 pos : SV_POSITION,
-	float2 uv : TEXCOORD,
-	out float4 oC0 : SV_TARGET
-) {
-	//Declare parameters
-	//Window Size
-	int2 i2Resolution = int2(424,240);
-	float fDownScale = 0.005;
-	//pixelSize
-	float4 c0 = ReShade::ScreenSize.xyyy / float4(ReShade::AspectRatio, 1, 1, 1);
-	//textureSize
-	float4 c1 = i2Resolution.xyyy / fDownScale;
-	//viewSize
-	float4 c2 = ReShade::ScreenSize.xyyy / float4(ReShade::AspectRatio, 1, 1, 1);
-	//texDiffuse
-	#define s0 ReShade::BackBuffer
-
-	//Declare constants
-	static const float4 c3 = float4(1.5, 0.800000012, 1.25, 0.75);
-    static const float4 c4 = float4(6.28318548, -3.14159274, 0.25, -0.25);
-    static const float4 c5 = float4(1, 0.5, 720, 3);
-    static const float4 c6 = float4(0.166666672, -0.333000004, -0.666000009, 0.899999976);
-    static const float4 c7 = float4(0.899999976, 1.10000002, 0, 0);
-    static const float4 c8 = float4(-0.5, -0.25, 2, 0.5);
-
-	//Declare registers
-	float4 r0, r1, r2, r3, r4, r5, r6, r7, r8, r9;
-
-	//Code starts here
-	float4 v0 = uv.xyyy;
-	//dcl_2d s0
-	r0.x = 1.0 / c0.x;
-	r0.y = 1.0 / c0.y;
-	r0.xy = (r0 * c1).xy;
-	r0.xy = (r0 * v0).xy;
-	r0.xy = (r0 * c2).xy;
-	r0.zw = frac(r0.xyxy).zw;
-	r0.xy = (-r0.zwzw + r0).xy;
-	r0.xy = (r0 + c8.wwww).xy;
-	r0.x = r0.y * c5.w + r0.x;
-	r0.x = r0.x * c6.x;
-	r0.x = frac(r0.x);
-	r0.xy = (r0.xxxx + c6.yzzw).xy;
-	r1.yz = (r0.y >= 0 ? c7.xxyw : c7.xyxw).yz;
-	r1.x = c6.w;
-	r0.xyz = (r0.x >= 0 ? r1 : c7.yxxw).xyz;
-	r1.xy = (c1 * v0).xy;
-	r0.w = r1.y * c8.w + c8.w;
-	r0.w = frac(r0.w);
-	r0.w = r0.w * c4.x + c4.y;
-	r2.y = sin(r0.w);
-	r1.zw = (abs(r2).yyyy + c4).zw;
-	r1.z = saturate(r1.z);
-	r0.w = r1.w >= 0 ? r1.z : c8.w;
-	r2 = frac(r1.xyxy);
-	r1.xy = (r1 + -r2.zwzw).xy;
-	r2 = r2 + c8.xxyy;
-	r1.zw = (r1.xyxy + c8.wwww).zw;
-	r1.zw = (v0.xyxy * -c1.xyxy + r1).zw;
-	r1.w = r1.w + r1.w;
-	r1.z = r1.z * c8.w;
-	r1.z = -abs(r1).z + c3.x;
-	r3.x = max(c3.y, r1.z);
-	r4.x = min(r3.x, c3.z);
-	r1.zw = (-abs(r1).wwww + c3).zw;
-	r1.z = saturate(r1.z);
-	r1.z = r1.w >= 0 ? r1.z : c8.w;
-	r4.y = r0.w + r1.z;
-	r0.w = r0.w * r4.x;
-	r1.z = r1.z * r4.x;
-	r3.xy = (r4 * c5).xy;
-	r1.w = r3.y * r3.x;
-    r2.z = cmp(r2, r2.xyxy, c8.yyyy).z;
-    r3.xy = max(c8.yyyy, -r2.zwzw).xy;
-    r2.xy = (r2 + r3).xy;
-    r1.xy = (r2 * c8.zzzz + r1).xy;
-    r1.xy = (r1 + c8.wwww).xy;
-    r2.x = 1.0 / c1.x;
-    r2.y = 1.0 / c1.y;
-    r1.xy = (r1 * r2).xy;
-    r2 = tex2D(s0, r1.xy);
-    r3.x = r0.w * r2.x;
-    r3.yz = (r1.xzww * r2).yz;
-    oC0.w = r2.w;
-    r0.xyz = (r0 * r3).xyz;
-    r1.z = c5.z;
-    r0.w = r1.z + -c2.y;
-    oC0.xyz = (r0.w >= 0 ? r3 : r0).xyz;
-}
-
-technique CRT_Yeetron {
-	pass {
+technique CRTYeetron
+{
+	pass CRTYeetron
+	{
 		VertexShader = PostProcessVS;
-		PixelShader = PS_CRT_Yeetron;
+		PixelShader = PS_CRTYeetron;
 	}
 }

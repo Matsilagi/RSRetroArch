@@ -6,6 +6,7 @@
  The Shaders included here comes mostly from [libretro/common-shaders](https://github.com/libretro/common-shaders) , but there are some from other sources aswell, below are a list of shaders, where they came from, and what they do:
  - 3DFX by LeiLei: attempts to mimic the VGA / RAMDAC cables, color dithering and screen quality of 3DFX cards, more specifically Vooodoo 2/3. Long gone from the RetroArch Shader repository. Also available as LeiFX_OA, with more updated versions and different tweaks.
  - ArtifactColors by FlyGuy: Uses a signal modulation created trough NTSC artifacting, to generate colors, pretty much like Apple II's low-res mode.
+ - Chromaticity by metallic77: Allows to change the signal (video and color) options.
  - CMYK Halftone Dot by hunterk: Originally made as a WebGL Demo by Stefan Gustavson, simulates the halftone dots used in CMYK prints, useful for magazine-like shots.
  - CoolRetroTerminal by Swordfish90: Originally from a Linux app [Swordfish90/cool-retro-term](https://github.com/Swordfish90/cool-retro-term) , i ported its Pixel Shader from QT a long time ago, its not by any means up-to-date, but still looks ultra-similar to how CoolRetroTerm works so, i guess its still useable. A big buggy and without bloom, but most of its features work fine.
  - CRT-Aperture by ???: Couldn't find the Author name, but seems like a modified CRT-Easymode made to mimic more a Trinitron display.
@@ -42,6 +43,7 @@
  - Scanlines-Fract by hunterk: Similar to the Scanlines-Abs, but using a frac operation. May look thicker and darker on some cases, but works better with non-integer scaled games.
  - SGENPT-mul by Hyllian: A shader that attempts to blur / join the dithering of Sega Genesis games. Works somewhat ok.
  - Technicolor by hunterk: A Technicolor shader meant to mimic old cartoons and suchs. Inspired partly by Cuphead.
+ - VHS by hunterk: A VHS-like shader ported from RetroArch. Based on a shadertoy snippet named "more AVdistortion" by ompuco. Does not include Rewind or text effects. (https://www.shadertoy.com/view/XlsczN)
  - zfast_crt by SoltanGris42: An ultra-lightweight CRT shader. Made to work fast on integrated gpus, while looking good. Designed for 1080p displays.
  
  There are also a few shaders from MAME included, those are:
@@ -61,6 +63,7 @@
  - LCD Post Effect by MenacingMecha: Makes the screen look like a Backlit LCD display, not really useful but might look eye-candy for some (https://www.shadertoy.com/view/ldBfDd)
  - MattiasCRT by Mattias: Ported from Shadertoy, based on the work of inigo quilez. (https://www.shadertoy.com/view/lsB3DV)
  - MetaCRT by P_Malin: Phosphor Mask / 2D part of the MetaCRT Shadertoy by P_Malin (https://www.shadertoy.com/view/4dlyWX)
+ - N64-3Point by cyrb: A port of the N64 3-point bilinear filtering. Made to be used with pixel-games in mind. Might or might not look good. (https://www.shadertoy.com/view/Ws2fWV)
  - Needs More JPEG by rory618: Applies DCT compression used by the JPEG file format. (https://www.shadertoy.com/view/llfyz4)
  - NTSC Decoder by xot: Same concept as Artifact Colors, infact, im using its siginal modulator coupled with specific values from this demodulator to get the result equal, not exactly how i do my ports, but hey, it works! (https://www.shadertoy.com/view/Mdffz7)
  - RGB LCD screen by forthcharlie: A LCD Display grid, similar to the phosphor pattern of MetaCRT (https://www.shadertoy.com/view/3sGXWc)
@@ -73,6 +76,10 @@
 Those repositories might also have something you like, make sure to check them out! 
 
 [akgunter/crt-royale-reshade](https://github.com/akgunter/crt-royale-reshade) - A port of the most accurate and feature filled CRT shader of RetroArch for ReShade. Original work by TroggleMonkey, ReShade port by akgunter. 
+
+[guestr/ReshadeShaders](https://github.com/guestrr/ReshadeShaders) - A few shaders of RetroArch from its original author. It doesn't get more faithful than this.
+
+[guestr/WinUAE-Shaders/ReShadeShaders](https://github.com/guestrr/WinUAE-Shaders/tree/master/ReshadeShaders) - WinUAE CRT Shaders ported to ReShade. WinUAE is a Commodore Amiga emulator. It might look cool for vintage PC presets.
 
 [luluco250/FXShaders](https://github.com/luluco250/FXShaders) - luluco's shader repository. Probably listed at the big ReShade ones, but worth mentioning here.
 
