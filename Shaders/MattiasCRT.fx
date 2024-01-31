@@ -17,7 +17,7 @@ float2 curve(float2 uv)
 	return uv;
 }
 
-void PS_CRTMattias1(in float4 pos : SV_POSITION, in float2 txcoord : TEXCOORD0, out float4 fragColor : COLOR0)
+void PS_CRTMattias1(in float4 pos : SV_POSITION, in float2 txcoord : TexCoord, out float4 fragColor : COLOR0)
 {
 	float2 fragCoord = txcoord * ReShade::ScreenSize;
     float2 q = fragCoord.xy / ReShade::ScreenSize.xy;
