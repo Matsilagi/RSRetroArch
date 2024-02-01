@@ -59,12 +59,12 @@ texture2D tAccTex { Width = BUFFER_WIDTH; Height = BUFFER_HEIGHT; Format = RGBA8
 sampler sAccTex { Texture=tAccTex; };
 
 //PASS 1
-float3 PrevColor(float4 pos : SV_Position, float2 uv : TEXCOORD0) : SV_Target
+float3 PrevColor(float4 pos : SV_Position, float2 uv : TexCoord) : SV_Target
 {
 	return tex2D(ReShade::BackBuffer, uv).rgb;
 }
 
-float4 PS_NewPixie_Accum(float4 pos : SV_Position, float2 uv : TEXCOORD0) : SV_Target
+float4 PS_NewPixie_Accum(float4 pos : SV_Position, float2 uv : TexCoord) : SV_Target
 {
    float4 a = tex2D(sAccTex, uv.xy) * float4(acc_modulate,acc_modulate,acc_modulate,acc_modulate);
    float4 b = tex2D(ReShade::BackBuffer, uv.xy);
@@ -91,7 +91,7 @@ uniform float blur_y <
 	ui_label = "Vertical Blur [CRT-NewPixie]";
 > = 1.0;
 
-float4 PS_NewPixie_Blur(float4 pos : SV_Position, float2 uv_tx : TEXCOORD0) : SV_Target
+float4 PS_NewPixie_Blur(float4 pos : SV_Position, float2 uv_tx : TexCoord) : SV_Target
 {
    float2 blur = float2(blur_x, blur_y) * ReShade::PixelSize.xy;
    float2 uv = uv_tx.xy;
@@ -172,7 +172,7 @@ float rand(float2 co){ return frac(sin(dot(co.xy ,float2(12.9898,78.233))) * 437
 #define resolution ReShade::ScreenSize.xy
 #define mod(x,y) (x-y*floor(x/y))
 
-float4 PS_NewPixie_Final(float4 pos: SV_Position, float2 uv_tx : TEXCOORD0) : SV_Target
+float4 PS_NewPixie_Final(float4 pos: SV_Position, float2 uv_tx : TexCoord) : SV_Target
 {
    // stop time variable so the screen doesn't wiggle
    float time = mod(FCount, 849.0) * 36.0;
