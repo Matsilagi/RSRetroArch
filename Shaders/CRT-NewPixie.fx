@@ -171,6 +171,7 @@ float rand(float2 co){ return frac(sin(dot(co.xy ,float2(12.9898,78.233))) * 437
     
 #define resolution ReShade::ScreenSize.xy
 #define mod(x,y) (x-y*floor(x/y))
+#define gl_FragCoord (uv_tx.xy * resolution)
 
 float4 PS_NewPixie_Final(float4 pos: SV_Position, float2 uv_tx : TEXCOORD0) : SV_Target
 {
@@ -189,7 +190,7 @@ float4 PS_NewPixie_Final(float4 pos: SV_Position, float2 uv_tx : TEXCOORD0) : SV
     float3 col;
 	
     float x = wiggle_toggle* sin(0.1*time+curved_uv.y*13.0)*sin(0.23*time+curved_uv.y*19.0)*sin(0.3+0.11*time+curved_uv.y*23.0)*0.0012;
-    float o =sin(uv_tx.y*1.5)/resolution.x;
+    float o =sin(gl_FragCoord.y*1.5)/resolution.x;
     x+=o*0.25;
    // make time do something again
     time = float(mod(FCount, 640) * 1); 
@@ -233,7 +234,7 @@ float4 PS_NewPixie_Final(float4 pos: SV_Position, float2 uv_tx : TEXCOORD0) : SV
     col = col * float3(s,s,s);
 		
     /* Vertical lines (shadow mask) */
-    col*=1.0-0.23*(clamp((mod(uv_tx.xy.x, 3.0))/2.0,0.0,1.0));
+    col*=1.0-0.23*(clamp((mod(gl_FragCoord.xy.x, 3.0))/2.0,0.0,1.0));
 		
     /* Tone map */
     col = filmic( col );
