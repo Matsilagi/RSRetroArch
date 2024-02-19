@@ -258,6 +258,14 @@ float4 PS_CRTFakeLottes(float4 vpos : SV_Position, float2 txcoord : TexCoord) : 
 		col = scanline(pos, res);
 	#endif
 
+	#if (CURVATURE == 1)
+ 		// Clamp
+ 		if (pos.x < 0.0 || pos.x > 1.0)
+			col *= 0.0;
+		if (pos.y < 0.0 || pos.y > 1.0)
+			col *= 0.0;
+	#endif
+
 	return col;
 }
 
