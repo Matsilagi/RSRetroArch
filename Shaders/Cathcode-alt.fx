@@ -15,46 +15,67 @@
 	A version tweaked and made for 4k displays could look pretty close to the real thing.
 */
 
+// Phosphor kernel radius
+// 0 = 1 sample
+// 1 = 3 samples
+// 2 = 5 samples
+
+#define KERNEL_X 	1
+#define KERNEL_XX 	1
+#define KERNEL_Y 		1
+#define KERNEL_YY 	1
+
+#define mod(x,y) (x-y*floor(x/y))
+
 uniform float resSize <
 	ui_type = "drag";
 	ui_min = 1.0;
-	ui_max = 6.0;
+	ui_max = 7.0;
 	ui_step = 1;
-	ui_label = "Resolution Size";
+	ui_label = "Resolution x-Size";
 	ui_tooltip = "Size of scanlines.";
-> = 2.0;
+> = 3.0;
 
-uniform float Brightness <
+uniform float ScanlineStrength <
     ui_type = "drag";
-    ui_label = "Brightness Out";
-    ui_min = 0.5;
-    ui_max = 1.5;
+    ui_label = "Scanline Strength";
+    ui_min = 0.75;
+    ui_max = 1.75;
     ui_step = 0.01;
+> = 1.01;
+
+uniform float RedGain <
+	ui_type = "drag";
+	ui_label = "Red Phosphor Strength";
+	ui_min = 0.5;
+	ui_max = 1.5;
+	ui_step = 0.01;
 > = 1.0;
 
 uniform float RedOffsetY <
 	ui_type = "drag";
 	ui_label = "Red Phosphor Offset";
 	ui_tooltip = "Vertical position of the red phosphor.";
-	ui_min = 0;
+	ui_min = -0.5;
 	ui_max = 0.5;
 	ui_step = 0.01;
-> = 0.08;
+> = 0;
 
 uniform float RGBOffsetX <
 	ui_type = "drag";
 	ui_label = "Green/Blue Phosphor Offset";
 	ui_tooltip = "Horizontal distance between green and blue phosphors.";
-	ui_min = 0.0;
-	ui_max = 0.3;
+	ui_min = -1.0;
+	ui_max = 1;
 	ui_step = 0.01;
-> = 0.25;
+> = 0;
 
 uniform float phosphorsgain <
     ui_type = "drag";
     ui_label = "Phosphors gain";
-    ui_min = 0.8;
-    ui_max = 1.3;
+	ui_tooltip = "Brightness all phosphor.";
+    ui_min = 0.5;
+    ui_max = 1.5;
     ui_step = 0.01;
 > = 1.08;
 
@@ -66,17 +87,21 @@ uniform float3 WhiteBalance <
 	ui_step = 0.01;
 > = float3(1.0, 1.0, 1.0);
 
-#define mod(x,y) (x-y*floor(x/y))
-
-//Phosphor decay
+		//		Phosphor decay
 float decay(float d)
 {
+    d *= ScanlineStrength;
+
     float d2 = d*d;
-    return lerp(exp2(-d2*2.5-.3),
-    0.05/(d2*d*0.45+0.055),.65)*0.99;
+
+    return lerp(
+        exp2(-d2*2.5-.3),
+        0.05/(d2*d*0.45+0.055),
+        .65
+    ) * 0.99;
 }
 
-//Phosphor shape
+		//		Phosphor shape
 float sqd(in float2 a, in float2 b)
 {
     a -= b;
@@ -94,26 +119,28 @@ float3 phosphors(in float2 p, sampler2D tex, float2 frgCoord)
     p.y += mod(frgCoord.x,4.)<2.?.02:-0.02;
     
 	float3 src = tex2D(tex, frgCoord.xy).rgb;
-	src = pow(src,float3(1.13,1.13,1.13)) * phosphorsgain;
+	src = pow(src,float3(1.12,1.12,1.12)) * phosphorsgain;
 	
-	// 3x3
-for(int i=-1;i<=1;i++)
-for(int j=-1;j<=1;j++)
+		//		3x3 kernel (fragment can be affected by a pixel that is # game pixels away)
+		//     x. < -LeftRadius)  >  RightRadius) 
+		//     y. < -DownRadius)  >  UpRadius)    
+for (int i = -KERNEL_X; i <= KERNEL_XX; i++)
+for (int j = -KERNEL_Y; j <= KERNEL_YY; j++)
     {
-        float2 tap = floor(p) + 0.5 + float2(i,j);
-		float3 rez = src;
+	float MaskPhase = 0.5 + (1.0 - ScanlineStrength) * 0.5;
+	float2 tap = floor(p + MaskPhase) + 0.5 + float2(i,j);
+	float3 rez = src;
         
 		//center points ... alt replace: float rd = sqd(tap, p);
-float rd = sqd(tap, p + float2(0.0, RedOffsetY));//distance to red dot
-float gd = sqd(tap, p + float2(RGBOffsetX,0.0));//distance to green dot
-float bd = sqd(tap, p + float2(-RGBOffsetX,0.0));//distance to blue dot
+	float rd = sqd(tap, p + float2(0.0, RedOffsetY));//distance to red dot
+	float gd = sqd(tap, p + float2(RGBOffsetX,0.0));//distance to green dot
+	float bd = sqd(tap, p + float2(-RGBOffsetX,0.0));//distance to blue dot
 		
-        rez.r *= decay(rd);
+        rez.r *= decay(rd) * RedGain;
         rez.g *= decay(gd);
         rez.b *= decay(bd);
         col += rez;
     }
-	col *= Brightness;
 	col *= WhiteBalance;
     return col;
 }
